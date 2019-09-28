@@ -1,4 +1,4 @@
-module Lib
+module PegNet.RPC.Api
     ( someFunc
     ) where
 

@@ -13,4 +13,4 @@ dependencies:
 library:
   source-dirs: src
   exposed-modules:
-  - Lib
+  - PegNet.RPC.Api
