@@ -1,0 +1,16 @@
+name: api-pegnet
+version: '0.1.0.0'
+category: Web
+author: Sergey Bushnyak
+maintainer: sergey.bushnyak@sigrlami.eu
+copyright: ! 'Copyright: (c) 2019 Sergey Bushnyak'
+license: BSD3
+github: sigrlami/api-pegnet
+extra-source-files:
+- README.md
+dependencies:
+- base >=4.7 && <5
+library:
+  source-dirs: src
+  exposed-modules:
+  - Lib
