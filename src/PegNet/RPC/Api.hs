@@ -28,12 +28,16 @@ import           Network.Socket                   (HostName, ServiceName,
                                                    close, connect, defaultHints,
                                                    getAddrInfo, socket)
 
+import           PegNet.RPC.Types.Balances
+import           PegNet.RPC.Types.Issuance
 import           PegNet.RPC.Types.SyncStatus
 import           PegNet.RPC.Types.Transaction
 
 --------------------------------------------------------------------------------
 
-endpoint  = "http://localhost:8070/v1"
+-- | Simple endpoint wrappers to use as different
+--   local or remotte API endoint, keep default values
+endpoint       = "http://localhost:8070/v1"
 endpointRemote = "http://dev.pegnet.org/v1"
 
 -- | "get-sync-status"
@@ -48,28 +52,38 @@ reqGetTransaction :: Text -> Text -> RPC Transaction
 reqGetTransaction chainId entryHash =
   method "get-transaction" $ List [String chainId, String entryHash]
 
-reqPegNetIssuance :: RPC ()
+-- | Get the total supply for each pegnet asset.
+--
+reqPegNetIssuance :: RPC NetIssuance
 reqPegNetIssuance =
   method "get-pegnet-issuance" None
 
-reqPegNetBalances :: RPC ()
+-- | Get the pegnet asset balances for a given address
+--
+reqPegNetBalances :: Text -> RPC NetBalances
 reqPegNetBalances =
-  method "get-pegnet-balances" None
+  method "get-pegnet-balances" $ List [String address]
 
+-- |
+--
 reqPegNetRates :: RPC ()
 reqPegNetRates =
   method "get-pegnet-rates" None
 
+-- |
+--
 reqGetTransactionStatus :: Text -> RPC ()
 reqGetTransactionStatus id =
   method "get-transaction-status" None
-
+-- |
+--
 reqGeTransactions :: RPC [Transaction]
 reqGeTransactions =
   method "get-transactions" None
 
 --------------------------------------------------------------------------------
 
+-- Testing access functionality
 main = do
   let s = weakSession (traceSendAPI "" $ clientSendAPI endpoint)
   h <- send s $ do
