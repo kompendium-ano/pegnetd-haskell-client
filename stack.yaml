@@ -6,10 +6,10 @@ packages:
 - .
 
 extra-deps:
-- git: 'git@github.com:sigrlami/remote-json.git'
+- git: 'https://github.com/sigrlami/remote-json'
   commit: 'd9e38be7955306418a3a6bc3fff8d15746f23ea0'
   subdirs:
     - .
     - remote-json-client
-- git: 'git@github.com:ku-fpg/remote-monad'
+- git: 'https://github.com/ku-fpg/remote-monad'
   commit: '79d22ea2bde876e6640a25472d90fc3d7dd82a3a'
