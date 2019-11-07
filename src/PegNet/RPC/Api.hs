@@ -30,6 +30,7 @@ import           Network.Socket                   (HostName, ServiceName,
 
 import           PegNet.RPC.Types.Balances
 import           PegNet.RPC.Types.Issuance
+import           PegNet.RPC.Types.Rates
 import           PegNet.RPC.Types.SyncStatus
 import           PegNet.RPC.Types.Transaction
 
@@ -61,14 +62,14 @@ reqPegNetIssuance =
 -- | Get the pegnet asset balances for a given address
 --
 reqPegNetBalances :: Text -> RPC NetBalances
-reqPegNetBalances =
+reqPegNetBalances address =
   method "get-pegnet-balances" $ List [String address]
 
 -- |
 --
-reqPegNetRates :: RPC ()
-reqPegNetRates =
-  method "get-pegnet-rates" None
+reqPegNetRates :: Int -> RPC Rates
+reqPegNetRates height =
+  method "get-pegnet-rates" $ List [toJSON height]
 
 -- |
 --
