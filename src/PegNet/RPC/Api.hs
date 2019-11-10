@@ -39,7 +39,7 @@ import           PegNet.RPC.Types.Transaction
 -- | Simple endpoint wrappers to use as different
 --   local or remotte API endoint, keep default values
 endpoint       = "http://localhost:8070/v1"
-endpointRemote = "http://dev.pegnet.org/v1"
+endpointRemote = "https://api.pegnetd.com"
 
 -- | "get-sync-status"
 --   Return the current heights synced by pegnetd and the factomd it is communicating with
@@ -48,10 +48,12 @@ reqGetSyncStatus =
   method "get-sync-status" None -- $ List [toJSON height]
 
 -- | "get-transaction"
---   Returns if a given entry hash is a pegnet transaction, and if so returns the transaction.
-reqGetTransaction :: Text -> Text -> RPC Transaction
-reqGetTransaction chainId entryHash =
-  method "get-transaction" $ List [String chainId, String entryHash]
+--   Returns the given pegnet transaction if it exists.
+reqGetTransaction :: Text             -- ^ Transaction id
+                  -> RPC Transaction  -- ^ Requested Transaction
+reqGetTransaction chainId =
+  method "get-transaction"
+    $ Named [("txid", String chainId)]
 
 -- | Get the total supply for each pegnet asset.
 --
@@ -61,9 +63,11 @@ reqPegNetIssuance =
 
 -- | Get the pegnet asset balances for a given address
 --
-reqPegNetBalances :: Text -> RPC NetBalances
+reqPegNetBalances :: Text             -- ^ Address to get balances from
+                  -> RPC NetBalances  -- ^ Resulting balances over all assets
 reqPegNetBalances address =
-  method "get-pegnet-balances" $ List [String address]
+  method "get-pegnet-balances"
+    $ Named [("address", String address)]
 
 -- |
 --
@@ -76,18 +80,28 @@ reqPegNetRates height =
 reqGetTransactionStatus :: Text -> RPC ()
 reqGetTransactionStatus id =
   method "get-transaction-status" None
+
 -- |
 --
-reqGeTransactions :: RPC [Transaction]
-reqGeTransactions =
+reqGetTransactions :: RPC [Transaction]
+reqGetTransactions =
   method "get-transactions" None
 
 --------------------------------------------------------------------------------
 
 -- Testing access functionality
+-- NB: Factom and PegNet API return results with `plain\text` headers, we
+--     need to use alternative client to handle conversion issues, since Wreq
+--     library automatically throws and error for responses that are not `application\json`
 main = do
-  let s = weakSession (traceSendAPI "" $ clientSendAPI endpoint)
-  h <- send s $ do
+  let s = weakSession $ traceSendAPI "" $ clientSendAPIWithAlt endpointRemote
+  (h, i) <- send s $ do
          h <- reqGetSyncStatus
-         return h
-  print h
+         i <- reqPegNetIssuance
+         b <- reqPegNetBalances "FA38cwer93mmPw1HxjScLmK1yF9iJTu5P87T2vdkbuLovm2YXyss"
+         t <- reqGetTransaction "0-e4380e6334b0c42d4d6155fbd1378050b91c02a0df93d7fdfe6656f94c61e7eb"
+         return (h, i)
+  -- process resulted values
+  --print h
+  --print i
+  return ()
