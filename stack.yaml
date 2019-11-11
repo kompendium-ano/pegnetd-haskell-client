@@ -7,7 +7,7 @@ packages:
 
 extra-deps:
 - git: 'https://github.com/sigrlami/remote-json'
-  commit: 'd9e38be7955306418a3a6bc3fff8d15746f23ea0'
+  commit: '3db7446c1451cd97aa22b424deb9ce9c25259a36'
   subdirs:
     - .
     - remote-json-client
