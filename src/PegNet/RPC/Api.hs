@@ -33,6 +33,7 @@ import           PegNet.RPC.Types.Issuance
 import           PegNet.RPC.Types.Rates
 import           PegNet.RPC.Types.SyncStatus
 import           PegNet.RPC.Types.Transaction
+import           PegNet.RPC.Types.TransactionStatus
 
 --------------------------------------------------------------------------------
 
@@ -51,9 +52,9 @@ reqGetSyncStatus =
 --   Returns the given pegnet transaction if it exists.
 reqGetTransaction :: Text             -- ^ Transaction id
                   -> RPC Transaction  -- ^ Requested Transaction
-reqGetTransaction chainId =
+reqGetTransaction txid =
   method "get-transaction"
-    $ Named [("txid", String chainId)]
+    $ Named [("txid", String txid)]
 
 -- | Get the total supply for each pegnet asset.
 --
@@ -73,16 +74,21 @@ reqPegNetBalances address =
 --
 reqPegNetRates :: Int -> RPC Rates
 reqPegNetRates height =
-  method "get-pegnet-rates" $ List [toJSON height]
+  method "get-pegnet-rates"
+    $ Named [("height", toJSON height)]
+
+-- | "get-transaction-status"
+--   Returns the status of a transaction.
+--   The parameter entryhash can be either a winning OPR entry hash,
+--   a transaction chain entry hash, or an FCT Burn transaction id.
+reqGetTransactionStatus :: Text
+                        -> RPC TransactionStatus
+reqGetTransactionStatus entryHash =
+  method "get-transaction-status"
+    $ Named [("entryhash", String entryHash)]
 
 -- |
---
-reqGetTransactionStatus :: Text -> RPC ()
-reqGetTransactionStatus id =
-  method "get-transaction-status" None
-
--- |
---
+--  Returns a set of up to 50 transactions for the given parameters.
 reqGetTransactions :: RPC [Transaction]
 reqGetTransactions =
   method "get-transactions" None
@@ -98,8 +104,10 @@ main = do
   (h, i) <- send s $ do
          h <- reqGetSyncStatus
          i <- reqPegNetIssuance
-         b <- reqPegNetBalances "FA38cwer93mmPw1HxjScLmK1yF9iJTu5P87T2vdkbuLovm2YXyss"
-         t <- reqGetTransaction "0-e4380e6334b0c42d4d6155fbd1378050b91c02a0df93d7fdfe6656f94c61e7eb"
+         --b <- reqPegNetBalances "FA38cwer93mmPw1HxjScLmK1yF9iJTu5P87T2vdkbuLovm2YXyss"
+         --t <- reqGetTransaction "0-e4380e6334b0c42d4d6155fbd1378050b91c02a0df93d7fdfe6656f94c61e7eb"
+         --r <- reqPegNetRates 213000
+         s <- reqGetTransactionStatus "a33d4f334a2658c17d3f44158af75f1c32cc6b2f3de9ddc337064c93043d8db0"
          return (h, i)
   -- process resulted values
   --print h
