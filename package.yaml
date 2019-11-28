@@ -1,11 +1,11 @@
-name: api-pegnet
+name: api-rpc-pegnet
 version: '0.1.0.0'
 category: Web
 author: Sergey Bushnyak
 maintainer: sergey.bushnyak@sigrlami.eu
 copyright: ! 'Copyright: (c) 2019 Sergey Bushnyak'
-license: BSD3
-github: sigrlami/api-pegnet
+license: MIT
+github: sigrlami/api-rpc-pegnet
 extra-source-files:
 - README.md
 dependencies:
