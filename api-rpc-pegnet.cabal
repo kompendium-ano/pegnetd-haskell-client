@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d9ffeb6745ed390c64b099717c26716a08d3f17d5bbd499b49f82592d752ea2f
+-- hash: af386f113b3c719586326f1d73d225dddfde257c180311058e878f2bfa63786a
 
 name:           api-rpc-pegnet
 version:        0.1.0.0
@@ -28,9 +28,25 @@ library
   exposed-modules:
       PegNet.RPC.Api
   other-modules:
+      PegNet.RPC.Types
+      PegNet.RPC.Types.SyncStatus
       Paths_api_rpc_pegnet
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , aeson-casing
+    , base >=4.7 && <5
+    , bytestring
+    , http-client
+    , http-client-tls
+    , http-conduit
+    , json-alt
+    , network
+    , remote-json
+    , remote-json-client
+    , remote-monad
+    , text
+    , time
+    , transformers
   default-language: Haskell2010

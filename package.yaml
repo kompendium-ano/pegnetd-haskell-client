@@ -9,7 +9,22 @@ github: sigrlami/api-rpc-pegnet
 extra-source-files:
 - README.md
 dependencies:
-- base >=4.7 && <5
+  - base >=4.7 && <5
+  - aeson
+  - aeson-casing
+  - text
+  - time
+  - http-conduit
+  - http-client
+  - http-client-tls
+  - network
+  - transformers
+  - remote-monad
+  - remote-json
+  - remote-json-client
+  # - json-autotype
+  - json-alt
+  - bytestring
 library:
   source-dirs: src
   exposed-modules:
