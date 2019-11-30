@@ -45,6 +45,25 @@ reqGeTransaction :: Text -> Text -> RPC Transaction
 reqGeTransaction chainId entryHash =
   method "get-transaction" List [String chainId, String entryHash]
 
+reqPegNetIssuance :: RPC ()
+reqPegNetIssuance =
+  method "get-pegnet-issuance" None
+
+reqPegNetBalances :: RPC ()
+reqPegNetBalances =
+  method "get-pegnet-balances" None
+
+reqPegNetRates :: RPC ()
+reqPegNetRates =
+  method "get-pegnet-rates" None
+
+reqGetTransactionStatus :: Text -> RPC ()
+reqGeTransactionStatus =
+    method "get-transaction-status" None
+
+reqGeTransactions :: RPC [Transaction]
+reqGeTransactions =
+  method "get-transactions" None
 
 --------------------------------------------------------------------------------
 
