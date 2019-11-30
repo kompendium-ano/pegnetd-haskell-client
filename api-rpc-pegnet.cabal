@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: af386f113b3c719586326f1d73d225dddfde257c180311058e878f2bfa63786a
+-- hash: caca34d76d98a2d87b60461118f72c07e62777df021cb5b174738ea3f3b57349
 
 name:           api-rpc-pegnet
 version:        0.1.0.0
@@ -30,6 +30,7 @@ library
   other-modules:
       PegNet.RPC.Types
       PegNet.RPC.Types.SyncStatus
+      PegNet.RPC.Types.Transaction
       Paths_api_rpc_pegnet
   hs-source-dirs:
       src

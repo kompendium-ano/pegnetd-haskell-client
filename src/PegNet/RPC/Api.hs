@@ -29,6 +29,7 @@ import           Network.Socket                   (HostName, ServiceName,
                                                    getAddrInfo, socket)
 
 import           PegNet.RPC.Types.SyncStatus
+import           PegNet.RPC.Types.Transaction
 
 --------------------------------------------------------------------------------
 
@@ -41,9 +42,9 @@ reqGetSyncStatus :: RPC SyncStatus
 reqGetSyncStatus =
   method "get-sync-status" None -- $ List [toJSON height]
 
-reqGeTransaction :: Text -> Text -> RPC Transaction
-reqGeTransaction chainId entryHash =
-  method "get-transaction" List [String chainId, String entryHash]
+reqGetTransaction :: Text -> Text -> RPC Transaction
+reqGetTransaction chainId entryHash =
+  method "get-transaction" $ List [String chainId, String entryHash]
 
 reqPegNetIssuance :: RPC ()
 reqPegNetIssuance =
@@ -58,8 +59,8 @@ reqPegNetRates =
   method "get-pegnet-rates" None
 
 reqGetTransactionStatus :: Text -> RPC ()
-reqGeTransactionStatus =
-    method "get-transaction-status" None
+reqGetTransactionStatus id =
+  method "get-transaction-status" None
 
 reqGeTransactions :: RPC [Transaction]
 reqGeTransactions =
