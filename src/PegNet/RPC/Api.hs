@@ -41,6 +41,9 @@ reqGetSyncStatus :: RPC SyncStatus
 reqGetSyncStatus =
   method "get-sync-status" None -- $ List [toJSON height]
 
+reqGeTransaction :: Text -> Text -> RPC Transaction
+reqGeTransaction chainId entryHash =
+  method "get-transaction" List [String chainId, String entryHash]
 
 
 --------------------------------------------------------------------------------
