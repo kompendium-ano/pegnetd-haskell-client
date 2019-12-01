@@ -4,10 +4,12 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: caca34d76d98a2d87b60461118f72c07e62777df021cb5b174738ea3f3b57349
+-- hash: f998af876ee380cd0f3e17213282441322f7618fb4ea71159e87d583bb7e2f57
 
 name:           api-rpc-pegnet
 version:        0.1.0.0
+synopsis:       simple json-rpc client for PegNet
+description:    simple json-rpc client for PegNet integration
 category:       Web
 homepage:       https://github.com/sigrlami/api-rpc-pegnet#readme
 bug-reports:    https://github.com/sigrlami/api-rpc-pegnet/issues

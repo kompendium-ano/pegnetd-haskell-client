@@ -42,6 +42,8 @@ reqGetSyncStatus :: RPC SyncStatus
 reqGetSyncStatus =
   method "get-sync-status" None -- $ List [toJSON height]
 
+-- | "get-transaction"
+--   Returns if a given entry hash is a pegnet transaction, and if so returns the transaction.
 reqGetTransaction :: Text -> Text -> RPC Transaction
 reqGetTransaction chainId entryHash =
   method "get-transaction" $ List [String chainId, String entryHash]

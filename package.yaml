@@ -3,6 +3,8 @@ version: '0.1.0.0'
 category: Web
 author: Sergey Bushnyak
 maintainer: sergey.bushnyak@sigrlami.eu
+synopsis: simple json-rpc client for PegNet
+description: simple json-rpc client for PegNet integration
 copyright: ! 'Copyright: (c) 2019 Sergey Bushnyak'
 license: MIT
 github: sigrlami/api-rpc-pegnet
