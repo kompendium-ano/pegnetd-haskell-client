@@ -72,25 +72,38 @@ reqPegNetBalances address =
 
 -- |
 --
-reqPegNetRates :: Int -> RPC Rates
+reqPegNetRates :: Int           -- ^ Specified height to get rates at
+               -> RPC Rates     -- ^ Resulted Rates
 reqPegNetRates height =
   method "get-pegnet-rates"
     $ Named [("height", toJSON height)]
 
 -- | "get-transaction-status"
 --   Returns the status of a transaction.
---   The parameter entryhash can be either a winning OPR entry hash,
+--   The parameter `entryhash` can be either a winning OPR entry hash,
 --   a transaction chain entry hash, or an FCT Burn transaction id.
-reqGetTransactionStatus :: Text
-                        -> RPC TransactionStatus
+reqGetTransactionStatus :: Text                    -- ^ Transaction chain entry hash
+                        -> RPC TransactionStatus   -- ^ Current status of transaction
 reqGetTransactionStatus entryHash =
   method "get-transaction-status"
     $ Named [("entryhash", String entryHash)]
 
--- |
---  Returns a set of up to 50 transactions for the given parameters.
-reqGetTransactions :: RPC [Transaction]
-reqGetTransactions =
+-- | get-transactions
+--   Returns a set of up to 50 transactions for the given parameters.
+--   TODO: this many arguments including boolean combination is a case
+--         for a bad API design. Better hide it with convinience functions
+--         provided to library user
+reqGetTransactions :: Maybe Text
+                   -> Maybe Text
+                   -> Maybe Int
+                   -> Maybe Int   -- ^ offset
+                   -> Maybe Bool
+                   -> Maybe Bool
+                   -> Maybe Bool
+                   -> Maybe Bool
+                   -> Maybe Bool
+                   -> RPC [Transaction]
+reqGetTransactions mbEntryHash mbAddress mbHeight mbOffset b1 b2 b3 b4 b5 =
   method "get-transactions" None
 
 --------------------------------------------------------------------------------
