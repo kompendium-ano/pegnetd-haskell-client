@@ -106,7 +106,18 @@ reqGetTransactions :: Maybe Text        -- ^
                    -> Maybe Bool        -- ^
                    -> RPC [Transaction] -- ^ List of Transactions by specified parameters
 reqGetTransactions mbEntryHash mbAddress mbHeight mbOffset b1 b2 b3 b4 b5 =
-  method "get-transactions" None
+  method "get-transactions"
+    $ Named ([]
+     ++ (case mbEntryHash of
+           Nothing -> []
+           Just eh -> [("entryhash", String eh)])
+     ++ (case mbAddress of
+           Nothing -> []
+           Just ad -> [("address", String ad)])
+     ++ (case mbHeight of
+           Nothing -> []
+           Just hg -> [("height", toJSON hg)]))
+
 
 -- | "get-rich-list"
 --   Returns the rich list of addresses for all assets or a specific asset.
