@@ -12,7 +12,7 @@
 module PegNet.RPC.Api where
 
 import           Control.Concurrent
-import           Control.Exception                (bracket)
+import           Control.Exception                  (bracket)
 import           Control.Monad.IO.Class
 import           Control.Remote.Monad.JSON
 import           Control.Remote.Monad.JSON.Client
@@ -21,16 +21,18 @@ import           Control.Remote.Monad.JSON.Trace
 import           Data.Aeson
 import           Data.Aeson.Types
 import           Data.Text
-import           Network.Socket                   (HostName, ServiceName,
-                                                   SocketType (Stream),
-                                                   addrAddress, addrFamily,
-                                                   addrProtocol, addrSocketType,
-                                                   close, connect, defaultHints,
-                                                   getAddrInfo, socket)
+import           Network.Socket                     (HostName, ServiceName,
+                                                     SocketType (Stream),
+                                                     addrAddress, addrFamily,
+                                                     addrProtocol,
+                                                     addrSocketType, close,
+                                                     connect, defaultHints,
+                                                     getAddrInfo, socket)
 
 import           PegNet.RPC.Types.Balances
 import           PegNet.RPC.Types.Issuance
 import           PegNet.RPC.Types.Rates
+import           PegNet.RPC.Types.RichEntry
 import           PegNet.RPC.Types.SyncStatus
 import           PegNet.RPC.Types.Transaction
 import           PegNet.RPC.Types.TransactionStatus
@@ -70,8 +72,8 @@ reqPegNetBalances address =
   method "get-pegnet-balances"
     $ Named [("address", String address)]
 
--- |
---
+-- | "get-pegnet-rates"
+--   Returns the pegnet conversion rates for a given block height.
 reqPegNetRates :: Int           -- ^ Specified height to get rates at
                -> RPC Rates     -- ^ Resulted Rates
 reqPegNetRates height =
@@ -93,18 +95,25 @@ reqGetTransactionStatus entryHash =
 --   TODO: this many arguments including boolean combination is a case
 --         for a bad API design. Better hide it with convinience functions
 --         provided to library user
-reqGetTransactions :: Maybe Text
-                   -> Maybe Text
-                   -> Maybe Int
-                   -> Maybe Int   -- ^ offset
-                   -> Maybe Bool
-                   -> Maybe Bool
-                   -> Maybe Bool
-                   -> Maybe Bool
-                   -> Maybe Bool
-                   -> RPC [Transaction]
+reqGetTransactions :: Maybe Text        -- ^
+                   -> Maybe Text        -- ^
+                   -> Maybe Int         -- ^
+                   -> Maybe Int         -- ^ offset
+                   -> Maybe Bool        -- ^
+                   -> Maybe Bool        -- ^
+                   -> Maybe Bool        -- ^
+                   -> Maybe Bool        -- ^
+                   -> Maybe Bool        -- ^
+                   -> RPC [Transaction] -- ^ List of Transactions by specified parameters
 reqGetTransactions mbEntryHash mbAddress mbHeight mbOffset b1 b2 b3 b4 b5 =
   method "get-transactions" None
+
+-- | "get-rich-list"
+--   Returns the rich list of addresses for all assets or a specific asset.
+reqGetRichList :: Maybe Text  -- ^ Asset name, exclude to list by all assets
+               -> Int         -- ^ Number to limit from top
+               -> RPC [RichEntry]
+reqGetRichList mbAsset limit = undefined
 
 --------------------------------------------------------------------------------
 

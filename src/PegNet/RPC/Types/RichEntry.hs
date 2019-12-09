@@ -5,7 +5,7 @@
 {-# LANGUAGE TemplateHaskell     #-}
 {-# LANGUAGE TypeOperators       #-}
 
-module PegNet.RPC.Types.TransactionStatus where
+module PegNet.RPC.Types.RichEntry where
 
 import           Control.Applicative
 import           Control.Monad                   (forM_, join, mzero)
@@ -23,25 +23,28 @@ import           System.IO                       (hPutStrLn, stderr)
 
 --------------------------------------------------------------------------------
 
-data TransactionStatus =
-  TransactionStatus {
-    txHeight   :: Int,
-    txExecuted :: Int
-  } deriving (Show,Eq,GHC.Generics.Generic)
+data RichEntry =
+  RichEntry
+    { reAmount  :: Int
+    , rePusd    :: Int
+    , reAddress :: Text
+    } deriving (Show, Eq, GHC.Generics.Generic)
 
-instance FromJSON TransactionStatus where
+instance FromJSON RichEntry where
   parseJSON (Object v) =
-    TransactionStatus
-      <$> v .: "height"
-      <*> v .: "executed"
-  parseJSON _          = mzero
+    RichEntry
+      <$> v .:  "amount"
+      <*> v .:  "pusd"
+      <*> v .:  "address"
+  parseJSON _ = mzero
 
-instance ToJSON TransactionStatus where
-  toJSON (TransactionStatus {..}) =
-    object [ "height" .= txHeight
-           , "executed" .= txExecuted
+instance ToJSON RichEntry where
+  toJSON (RichEntry {..}) =
+    object [ "amount"  .= reAmount
+           , "pusd"    .= rePusd
+           , "address" .= reAddress
            ]
-  toEncoding (TransactionStatus {..}) =
-    pairs  (    "height"   .= txHeight
-             <> "executed" .= txExecuted
-           )
+  toEncoding (RichEntry {..}) =
+    pairs  (   "amount"  .= reAmount
+            <> "pusd"    .= rePusd
+            <> "address" .= reAddress)
