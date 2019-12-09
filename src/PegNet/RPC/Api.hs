@@ -113,7 +113,13 @@ reqGetTransactions mbEntryHash mbAddress mbHeight mbOffset b1 b2 b3 b4 b5 =
 reqGetRichList :: Maybe Text  -- ^ Asset name, exclude to list by all assets
                -> Int         -- ^ Number to limit from top
                -> RPC [RichEntry]
-reqGetRichList mbAsset limit = undefined
+reqGetRichList mbAsset limit =
+  method "get-rich-list"
+    $ Named ([("count", toJSON limit)]
+             ++ (case mbAsset of
+                   Nothing    -> []
+                   Just asset -> [("asset", String asset)]))
+
 
 --------------------------------------------------------------------------------
 
@@ -129,7 +135,8 @@ main = do
          --b <- reqPegNetBalances "FA38cwer93mmPw1HxjScLmK1yF9iJTu5P87T2vdkbuLovm2YXyss"
          --t <- reqGetTransaction "0-e4380e6334b0c42d4d6155fbd1378050b91c02a0df93d7fdfe6656f94c61e7eb"
          --r <- reqPegNetRates 213000
-         s <- reqGetTransactionStatus "a33d4f334a2658c17d3f44158af75f1c32cc6b2f3de9ddc337064c93043d8db0"
+         -- s <- reqGetTransactionStatus "a33d4f334a2658c17d3f44158af75f1c32cc6b2f3de9ddc337064c93043d8db0"
+         rich <- reqGetRichList (Just "PEG") 5
          return (h, i)
   -- process resulted values
   --print h
