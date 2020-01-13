@@ -48,7 +48,7 @@ endpointRemote = "https://api.pegnetd.com"
 --   Return the current heights synced by pegnetd and the factomd it is communicating with
 reqGetSyncStatus :: RPC SyncStatus
 reqGetSyncStatus =
-  method "get-sync-status" None -- $ List [toJSON height]
+  method "get-sync-status" None
 
 -- | "get-transaction"
 --   Returns the given pegnet transaction if it exists.

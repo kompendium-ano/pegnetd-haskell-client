@@ -1,5 +1,5 @@
 name: api-rpc-pegnet
-version: '0.1.0.0'
+version: '0.1.1.2'
 category: Web
 author: Sergey Bushnyak
 maintainer: sergey.bushnyak@sigrlami.eu
@@ -31,6 +31,13 @@ library:
   source-dirs: src
   exposed-modules:
   - PegNet.RPC.Api
+  - PegNet.RPC.Types.Balances
+  - PegNet.RPC.Types.Issuance
+  - PegNet.RPC.Types.Rates
+  - PegNet.RPC.Types.RichEntry
+  - PegNet.RPC.Types.SyncStatus
+  - PegNet.RPC.Types.Transaction
+  - PegNet.RPC.Types.TransactionStatus
 tests:
   factom-test:
     main: Spec.hs

@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3854f4b587c8983de34e489e933ccffe8405ab2a31afca22f9b2c9eae5311c3a
+-- hash: acd27f307305fd0dd5daef183aeb50e1ad4b4b2327bb9c06464bf4baca8582c5
 
 name:           api-rpc-pegnet
-version:        0.1.0.0
+version:        0.1.1.2
 synopsis:       simple json-rpc client for PegNet
 description:    simple json-rpc client for PegNet integration
 category:       Web
@@ -29,8 +29,6 @@ source-repository head
 library
   exposed-modules:
       PegNet.RPC.Api
-  other-modules:
-      PegNet.RPC.Types
       PegNet.RPC.Types.Balances
       PegNet.RPC.Types.Issuance
       PegNet.RPC.Types.Rates
@@ -38,6 +36,8 @@ library
       PegNet.RPC.Types.SyncStatus
       PegNet.RPC.Types.Transaction
       PegNet.RPC.Types.TransactionStatus
+  other-modules:
+      PegNet.RPC.Types
       Paths_api_rpc_pegnet
   hs-source-dirs:
       src
