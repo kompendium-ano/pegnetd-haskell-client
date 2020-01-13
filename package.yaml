@@ -31,3 +31,14 @@ library:
   source-dirs: src
   exposed-modules:
   - PegNet.RPC.Api
+tests:
+  factom-test:
+    main: Spec.hs
+    source-dirs: tests
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - base
+    - api-rpc-pegnet
