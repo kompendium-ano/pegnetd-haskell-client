@@ -1,11 +1,11 @@
-# Haskell JSON-RPC client for PegNet
+# Haskell JSON-RPC client for PegNet daemon
 
 [![Build Status](https://travis-ci.com/kompendium-llc/pegnetd-haskell-client.svg?branch=master)](https://travis-ci.com/kompendium-llc/api-rpc-pegnet)
 [![Coverage Status](https://camo.githubusercontent.com/22e3c6a06327a75d482f0ac8a06bddcd2b2574b5/68747470733a2f2f696d672e736869656c64732e696f2f636f766572616c6c732f7368696e6e6e2f697374616e62756c2d636f766572616c6c732e737667)](https://coveralls.io/github/kompendium-llc/pegnetd-haskell-client?branch=master)
 ![Hackage](https://img.shields.io/hackage/v/api-rpc-pegnet)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/kompendium-llc/api-rpc-factom/blob/master/LICENSE)
 
-A JSON-RPC Haskell client for the PegNet [API](https://github.com/pegnet/pegnetd/wiki/API). Each response has special ADT(algebraic data type) that automatically converted from JSON response. Using [Remote Monad](https://ku-fpg.github.io/files/Gill-15-RemoteMonad.pdf) pattern multiple request can be batched and executed simulatenously, following more robust approach and reducing usage of expensive RPC calls.
+A JSON-RPC Haskell client for the PegNet [API](https://github.com/pegnet/pegnetd/wiki/API) daemon. Allows retrieval of data from PegNet dApp. Each response has special ADT(algebraic data type) that automatically converted from JSON response. Using [Remote Monad](https://ku-fpg.github.io/files/Gill-15-RemoteMonad.pdf) pattern multiple request can be batched and executed simulatenously, following more robust approach and reducing usage of expensive RPC calls.
 
 Choosing a batching strategy. There are two strategies:
 - `Weak`   - a single command or a single procedure, or
@@ -42,12 +42,12 @@ or load in REPL.
 
 2. build communication session with
 ```
-weakSession (traceSendAPI "" $ clientSendAPI endpoint)
+weakSession (traceSendAPI "" $ clientSendAPIWithAlt endpoint)
 ```
 
 3. run required methods inside `RPC` monad
 
-#### Retreiving a sync status
+### Using API methods
 
 ```haskell
 main = do
