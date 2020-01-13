@@ -11,7 +11,11 @@ Choosing a batching strategy. There are two strategies:
 - `Weak`   - a single command or a single procedure, or
 - `Strong` - a sequence of commands, optionally terminated by a procedure
 
-# Installation
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Contributions](#contributions)
+
+## Installation
 
 You can install package from [Hackage](https://hackage.haskell.org/package/api-rpc-pegnet) and build with Cabal, but we recommend to use [Stack](https://haskellstack.org) tool. Add to you dependencies in stack.yaml and cabal file dependency `- api-rpc-pegnet`.
 
@@ -47,7 +51,9 @@ weakSession (traceSendAPI "" $ clientSendAPIWithAlt endpoint)
 
 3. run required methods inside `RPC` monad
 
-### Using API methods
+## Usage
+
+You can construct simple session with all methods available for further processings. Check following execution
 
 ```haskell
 main = do
@@ -68,3 +74,17 @@ main = do
   print h
   -- or use for special business logic
 ```
+
+Variables `h` and `i` mapped to exact data stucture. All types available for detailed overview in `Types` directory.
+
+## Contributions
+
+Please, feel free to contribute, fork the repo and submit PR.
+
+
+Say thanks, send a tip:
+
+- `btc`: 39oVXpsgsyW8ZgzsnX3sV7HLdtXWfT96qN
+- `fct`: FA38cwer93mmPw1HxjScLmK1yF9iJTu5P87T2vdkbuLovm2YXyss
+- `eth`: 0x9cDBA6bb44772259B3A3fb89cf233A147a720f34
+- `xlm`: GD2FROTYXYSNOQQREYXHCXVOYWV556EM6PAHMVUHJNJEUYTUXUSNUZQ3
