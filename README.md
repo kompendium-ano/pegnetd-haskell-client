@@ -1,7 +1,7 @@
 # Haskell JSON-RPC client for PegNet daemon
 
 [![Build Status](https://travis-ci.com/kompendium-llc/pegnetd-haskell-client.svg?branch=master)](https://travis-ci.com/kompendium-llc/api-rpc-pegnet)
-[![Coverage Status](https://camo.githubusercontent.com/22e3c6a06327a75d482f0ac8a06bddcd2b2574b5/68747470733a2f2f696d672e736869656c64732e696f2f636f766572616c6c732f7368696e6e6e2f697374616e62756c2d636f766572616c6c732e737667)](https://coveralls.io/github/kompendium-llc/pegnetd-haskell-client?branch=master)
+[![Coverage Status](https://camo.githubusercontent.com/1869d40d8bf18178c833c359c1427e121fc15b90/68747470733a2f2f636f766572616c6c732e696f2f7265706f732f6c656d757268656176792f636f766572616c6c732d727562792f62616467652e7376673f6272616e63683d6d6173746572)](https://coveralls.io/github/kompendium-llc/pegnetd-haskell-client?branch=master)
 ![Hackage](https://img.shields.io/hackage/v/api-rpc-pegnet)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/kompendium-llc/api-rpc-factom/blob/master/LICENSE)
 
