@@ -14,6 +14,7 @@ import           Data.Aeson                      (FromJSON (..), ToJSON (..),
                                                   pairs, (.:), (.:?), (.=))
 import           Data.Aeson.AutoType.Alternative
 import qualified Data.ByteString.Lazy.Char8      as BSL
+import           Data.Int
 import           Data.Monoid
 import           Data.Text                       (Text)
 import qualified GHC.Generics
@@ -26,38 +27,37 @@ import           System.IO                       (hPutStrLn, stderr)
 -- | Workaround for https://github.com/bos/aeson/issues/287.
 o .:?? val = fmap join (o .:? val)
 
-
 data NetBalances = NetBalances {
-    topLevelPBRL  :: Double,
-    topLevelPRVN  :: Double,
-    topLevelPEUR  :: Double,
-    topLevelPUSD  :: Double,
-    topLevelPEG   :: Double,
-    topLevelPCHF  :: Double,
-    topLevelPDCR  :: Double,
-    topLevelPLTC  :: Double,
-    topLevelPMXN  :: Double,
-    topLevelPKRW  :: Double,
-    topLevelPXBT  :: Double,
-    topLevelPBNB  :: Double,
-    topLevelPCAD  :: Double,
-    topLevelPZEC  :: Double,
-    topLevelPXAU  :: Double,
-    topLevelPADA  :: Double,
-    topLevelPCNY  :: Double,
-    topLevelPXMR  :: Double,
-    topLevelPHKD  :: Double,
-    topLevelPINR  :: Double,
-    topLevelPGBP  :: Double,
-    topLevelPSGD  :: Double,
-    topLevelPPHP  :: Double,
-    topLevelPJPY  :: Double,
-    topLevelPDASH :: Double,
-    topLevelPXAG  :: Double,
-    topLevelPXBC  :: Double,
-    topLevelPFCT  :: Double,
-    topLevelPXLM  :: Double,
-    topLevelPETH  :: Double
+    pBRL  :: Int64,
+    pRVN  :: Int64,
+    pEUR  :: Int64,
+    pUSD  :: Int64,
+    pPEG  :: Int64,
+    pCHF  :: Int64,
+    pDCR  :: Int64,
+    pLTC  :: Int64,
+    pMXN  :: Int64,
+    pKRW  :: Int64,
+    pXBT  :: Int64,
+    pBNB  :: Int64,
+    pCAD  :: Int64,
+    pZEC  :: Int64,
+    pXAU  :: Int64,
+    pADA  :: Int64,
+    pCNY  :: Int64,
+    pXMR  :: Int64,
+    pHKD  :: Int64,
+    pINR  :: Int64,
+    pGBP  :: Int64,
+    pSGD  :: Int64,
+    pPHP  :: Int64,
+    pJPY  :: Int64,
+    pDASH :: Int64,
+    pXAG  :: Int64,
+    pXBC  :: Int64,
+    pFCT  :: Int64,
+    pXLM  :: Int64,
+    pETH  :: Int64
   } deriving (Show,Eq,GHC.Generics.Generic)
 
 
@@ -129,96 +129,96 @@ instance FromJSON NetBalances where
 
 instance ToJSON NetBalances where
   toJSON (NetBalances {..}) = object
-    [ "pBRL" .= topLevelPBRL
-    , "pRVN" .= topLevelPRVN
-    , "pEUR" .= topLevelPEUR
-    , "pUSD" .= topLevelPUSD
-    , "PEG" .= topLevelPEG
-    , "pCHF" .= topLevelPCHF
-    , "pDCR" .= topLevelPDCR
-    , "pLTC" .= topLevelPLTC
-    , "pMXN" .= topLevelPMXN
-    , "pKRW" .= topLevelPKRW
-    , "pXBT" .= topLevelPXBT
-    , "pBNB" .= topLevelPBNB
-    , "pCAD" .= topLevelPCAD
-    , "pZEC" .= topLevelPZEC
-    , "pXAU" .= topLevelPXAU
-    , "pADA" .= topLevelPADA
-    , "pCNY" .= topLevelPCNY
-    , "pXMR" .= topLevelPXMR
-    , "pHKD" .= topLevelPHKD
-    , "pINR" .= topLevelPINR
-    , "pGBP" .= topLevelPGBP
-    , "pSGD" .= topLevelPSGD
-    , "pPHP" .= topLevelPPHP
-    , "pJPY" .= topLevelPJPY
-    , "pDASH" .= topLevelPDASH
-    , "pXAG" .= topLevelPXAG
-    , "pXBC" .= topLevelPXBC
-    , "pFCT" .= topLevelPFCT
-    , "pXLM" .= topLevelPXLM
-    , "pETH" .= topLevelPETH
+    [ "pBRL" .= pBRL
+    , "pRVN" .= pRVN
+    , "pEUR" .= pEUR
+    , "pUSD" .= pUSD
+    , "PEG"  .= pPEG
+    , "pCHF" .= pCHF
+    , "pDCR" .= pDCR
+    , "pLTC" .= pLTC
+    , "pMXN" .= pMXN
+    , "pKRW" .= pKRW
+    , "pXBT" .= pXBT
+    , "pBNB" .= pBNB
+    , "pCAD" .= pCAD
+    , "pZEC" .= pZEC
+    , "pXAU" .= pXAU
+    , "pADA" .= pADA
+    , "pCNY" .= pCNY
+    , "pXMR" .= pXMR
+    , "pHKD" .= pHKD
+    , "pINR" .= pINR
+    , "pGBP" .= pGBP
+    , "pSGD" .= pSGD
+    , "pPHP" .= pPHP
+    , "pJPY" .= pJPY
+    , "pDASH" .= pDASH
+    , "pXAG" .= pXAG
+    , "pXBC" .= pXBC
+    , "pFCT" .= pFCT
+    , "pXLM" .= pXLM
+    , "pETH" .= pETH
     ]
   toEncoding (NetBalances {..}) = pairs
     (  "pBRL"
-    .= topLevelPBRL
+    .= pBRL
     <> "pRVN"
-    .= topLevelPRVN
+    .= pRVN
     <> "pEUR"
-    .= topLevelPEUR
+    .= pEUR
     <> "pUSD"
-    .= topLevelPUSD
+    .= pUSD
     <> "PEG"
-    .= topLevelPEG
+    .= pPEG
     <> "pCHF"
-    .= topLevelPCHF
+    .= pCHF
     <> "pDCR"
-    .= topLevelPDCR
+    .= pDCR
     <> "pLTC"
-    .= topLevelPLTC
+    .= pLTC
     <> "pMXN"
-    .= topLevelPMXN
+    .= pMXN
     <> "pKRW"
-    .= topLevelPKRW
+    .= pKRW
     <> "pXBT"
-    .= topLevelPXBT
+    .= pXBT
     <> "pBNB"
-    .= topLevelPBNB
+    .= pBNB
     <> "pCAD"
-    .= topLevelPCAD
+    .= pCAD
     <> "pZEC"
-    .= topLevelPZEC
+    .= pZEC
     <> "pXAU"
-    .= topLevelPXAU
+    .= pXAU
     <> "pADA"
-    .= topLevelPADA
+    .= pADA
     <> "pCNY"
-    .= topLevelPCNY
+    .= pCNY
     <> "pXMR"
-    .= topLevelPXMR
+    .= pXMR
     <> "pHKD"
-    .= topLevelPHKD
+    .= pHKD
     <> "pINR"
-    .= topLevelPINR
+    .= pINR
     <> "pGBP"
-    .= topLevelPGBP
+    .= pGBP
     <> "pSGD"
-    .= topLevelPSGD
+    .= pSGD
     <> "pPHP"
-    .= topLevelPPHP
+    .= pPHP
     <> "pJPY"
-    .= topLevelPJPY
+    .= pJPY
     <> "pDASH"
-    .= topLevelPDASH
+    .= pDASH
     <> "pXAG"
-    .= topLevelPXAG
+    .= pXAG
     <> "pXBC"
-    .= topLevelPXBC
+    .= pXBC
     <> "pFCT"
-    .= topLevelPFCT
+    .= pFCT
     <> "pXLM"
-    .= topLevelPXLM
+    .= pXLM
     <> "pETH"
-    .= topLevelPETH
+    .= pETH
     )

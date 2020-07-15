@@ -23,9 +23,7 @@ import           System.IO                       (hPutStrLn, stderr)
 
 --------------------------------------------------------------------------------
 
--- | Workaround for https://github.com/bos/aeson/issues/287.
 o .:?? val = fmap join (o .:? val)
-
 
 data Issuance = Issuance {
     issuancePBRL  :: Double,
@@ -129,36 +127,36 @@ instance FromJSON Issuance where
 
 instance ToJSON Issuance where
   toJSON (Issuance {..}) = object
-    [ "pBRL" .= issuancePBRL
-    , "pRVN" .= issuancePRVN
-    , "pEUR" .= issuancePEUR
-    , "pUSD" .= issuancePUSD
-    , "PEG" .= issuancePEG
-    , "pCHF" .= issuancePCHF
-    , "pDCR" .= issuancePDCR
-    , "pLTC" .= issuancePLTC
-    , "pMXN" .= issuancePMXN
-    , "pKRW" .= issuancePKRW
-    , "pXBT" .= issuancePXBT
-    , "pBNB" .= issuancePBNB
-    , "pCAD" .= issuancePCAD
-    , "pZEC" .= issuancePZEC
-    , "pXAU" .= issuancePXAU
-    , "pADA" .= issuancePADA
-    , "pCNY" .= issuancePCNY
-    , "pXMR" .= issuancePXMR
-    , "pHKD" .= issuancePHKD
-    , "pINR" .= issuancePINR
-    , "pGBP" .= issuancePGBP
-    , "pSGD" .= issuancePSGD
-    , "pPHP" .= issuancePPHP
-    , "pJPY" .= issuancePJPY
+    [ "pBRL"  .= issuancePBRL
+    , "pRVN"  .= issuancePRVN
+    , "pEUR"  .= issuancePEUR
+    , "pUSD"  .= issuancePUSD
+    , "PEG"   .= issuancePEG
+    , "pCHF"  .= issuancePCHF
+    , "pDCR"  .= issuancePDCR
+    , "pLTC"  .= issuancePLTC
+    , "pMXN"  .= issuancePMXN
+    , "pKRW"  .= issuancePKRW
+    , "pXBT"  .= issuancePXBT
+    , "pBNB"  .= issuancePBNB
+    , "pCAD"  .= issuancePCAD
+    , "pZEC"  .= issuancePZEC
+    , "pXAU"  .= issuancePXAU
+    , "pADA"  .= issuancePADA
+    , "pCNY"  .= issuancePCNY
+    , "pXMR"  .= issuancePXMR
+    , "pHKD"  .= issuancePHKD
+    , "pINR"  .= issuancePINR
+    , "pGBP"  .= issuancePGBP
+    , "pSGD"  .= issuancePSGD
+    , "pPHP"  .= issuancePPHP
+    , "pJPY"  .= issuancePJPY
     , "pDASH" .= issuancePDASH
-    , "pXAG" .= issuancePXAG
-    , "pXBC" .= issuancePXBC
-    , "pFCT" .= issuancePFCT
-    , "pXLM" .= issuancePXLM
-    , "pETH" .= issuancePETH
+    , "pXAG"  .= issuancePXAG
+    , "pXBC"  .= issuancePXBC
+    , "pFCT"  .= issuancePFCT
+    , "pXLM"  .= issuancePXLM
+    , "pETH"  .= issuancePETH
     ]
   toEncoding (Issuance {..}) = pairs
     (  "pBRL"
@@ -232,14 +230,16 @@ data Syncstatus = Syncstatus {
 
 instance FromJSON Syncstatus where
   parseJSON (Object v) =
-    Syncstatus <$> v .: "factomheight" <*> v .: "syncheight"
+    Syncstatus <$>
+      v .: "factomheight" <*>
+      v .: "syncheight"
   parseJSON _ = mzero
 
 
 instance ToJSON Syncstatus where
   toJSON (Syncstatus {..}) = object
     [ "factomheight" .= syncstatusFactomheight
-    , "syncheight" .= syncstatusSyncheight
+    , "syncheight"   .= syncstatusSyncheight
     ]
   toEncoding (Syncstatus {..}) = pairs
     (  "factomheight"
@@ -256,7 +256,9 @@ data NetIssuance = NetIssuance {
 
 
 instance FromJSON NetIssuance where
-  parseJSON (Object v) = NetIssuance <$> v .: "issuance" <*> v .: "syncstatus"
+  parseJSON (Object v) = NetIssuance <$>
+                           v .: "issuance"   <*>
+                           v .: "syncstatus"
   parseJSON _          = mzero
 
 
