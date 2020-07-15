@@ -139,17 +139,18 @@ reqGetRichList mbAsset limit =
 --     need to use alternative client to handle conversion issues, since Wreq
 --     library automatically throws and error for responses that are not `application\json`
 main = do
-  let s = weakSession $ traceSendAPI "" $ clientSendAPIWithAlt endpointRemote
-  (h, i) <- send s $ do
+  let s = weakSession $ traceSendAPI "" $ clientSendAPIWithAlt endpoint
+  (h, i, b) <- send s $ do
          h <- reqGetSyncStatus
          i <- reqPegNetIssuance
-         --b <- reqPegNetBalances "FA38cwer93mmPw1HxjScLmK1yF9iJTu5P87T2vdkbuLovm2YXyss"
+         b <- reqPegNetBalances "FA27NTqgJ6zQ4cqZsWeK9SwKAqfxpn3zCj3p5QHHuZXrDNugugUA"
          --t <- reqGetTransaction "0-e4380e6334b0c42d4d6155fbd1378050b91c02a0df93d7fdfe6656f94c61e7eb"
          --r <- reqPegNetRates 213000
          -- s <- reqGetTransactionStatus "a33d4f334a2658c17d3f44158af75f1c32cc6b2f3de9ddc337064c93043d8db0"
-         rich <- reqGetRichList (Just "PEG") 5
-         return (h, i)
+         -- rich <- reqGetRichList (Just "PEG") 5
+         return (h, i, b)
   -- process resulted values
   --print h
   --print i
+  print b
   return ()
