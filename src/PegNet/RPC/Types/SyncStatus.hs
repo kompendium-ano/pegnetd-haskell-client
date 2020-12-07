@@ -26,10 +26,11 @@ import           System.IO                       (hPutStrLn, stderr)
 -- | Workaround for https://github.com/bos/aeson/issues/287.
 o .:?? val = fmap join (o .:? val)
 
-data SyncStatus = SyncStatus {
-    topLevelFactomheight :: Double,
-    topLevelSyncheight   :: Double
-  } deriving (Show,Eq,GHC.Generics.Generic)
+data SyncStatus =
+  SyncStatus
+    { ssFactomHeight  :: Double
+    , ssPegSyncHeight :: Double
+    } deriving (Show,Eq,GHC.Generics.Generic)
 
 instance FromJSON SyncStatus where
   parseJSON (Object v) =
@@ -40,8 +41,10 @@ instance FromJSON SyncStatus where
 
 instance ToJSON SyncStatus where
   toJSON (SyncStatus {..}) =
-    object [ "factomheight" .= topLevelFactomheight
-           , "syncheight"   .= topLevelSyncheight]
+    object [ "factomheight" .= ssFactomHeight
+           , "syncheight"   .= ssPegSyncHeight
+           ]
   toEncoding (SyncStatus {..}) =
-    pairs  (   "factomheight" .= topLevelFactomheight
-            <> "syncheight"   .= topLevelSyncheight)
+    pairs  (   "factomheight" .= ssFactomHeight
+            <> "syncheight"   .= ssPegSyncHeight
+           )

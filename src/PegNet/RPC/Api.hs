@@ -41,8 +41,9 @@ import           PegNet.RPC.Types.TransactionStatus
 
 -- | Simple endpoint wrappers to use as different
 --   local or remotte API endoint, keep default values
-endpoint       = "http://localhost:8070/v1"
-endpointRemote = "https://api.pegnetd.com"
+endpoint         = "http://localhost:8070/v1"
+endpointRemote   = "http://51.158.171.20:8070/v1"
+endpointOpenNode = "https://api.pegnetd.com"
 
 -- | "get-sync-status"
 --   Return the current heights synced by pegnetd and the factomd it is communicating with
@@ -139,7 +140,7 @@ reqGetRichList mbAsset limit =
 --     need to use alternative client to handle conversion issues, since Wreq
 --     library automatically throws and error for responses that are not `application\json`
 main = do
-  let s = weakSession $ traceSendAPI "" $ clientSendAPIWithAlt endpoint
+  let s = weakSession $ traceSendAPI "" $ clientSendAPIWithAlt endpointRemote
   (h, i, b) <- send s $ do
          h <- reqGetSyncStatus
          i <- reqPegNetIssuance
@@ -152,5 +153,8 @@ main = do
   -- process resulted values
   --print h
   --print i
+  putStrLn "Node State:"
+  print h
+  putStrLn "\nPegNet balances for address: "
   print b
   return ()
