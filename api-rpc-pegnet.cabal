@@ -1,21 +1,21 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.2.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: acd27f307305fd0dd5daef183aeb50e1ad4b4b2327bb9c06464bf4baca8582c5
+-- hash: 4fe84ebad139539893b2a5c255710a6f8452cf69a8e3c184063467bf12968e7d
 
 name:           api-rpc-pegnet
-version:        0.1.1.2
+version:        0.1.1.4
 synopsis:       simple json-rpc client for PegNet
 description:    simple json-rpc client for PegNet integration
 category:       Web
-homepage:       https://github.com/sigrlami/api-rpc-pegnet#readme
-bug-reports:    https://github.com/sigrlami/api-rpc-pegnet/issues
+homepage:       https://github.com/kompendium-ano/pegnetd-haskell-client#readme
+bug-reports:    https://github.com/kompendium-ano/pegnetd-haskell-client/issues
 author:         Sergey Bushnyak
 maintainer:     sergey.bushnyak@sigrlami.eu
-copyright:      Copyright: (c) 2019 Sergey Bushnyak
+copyright:      Copyright: (c) 2019-2021 Sergey Bushnyak
 license:        MIT
 license-file:   LICENSE
 build-type:     Simple
@@ -24,7 +24,7 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/sigrlami/api-rpc-pegnet
+  location: https://github.com/kompendium-ano/pegnetd-haskell-client
 
 library
   exposed-modules:

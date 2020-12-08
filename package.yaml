@@ -1,13 +1,13 @@
 name: api-rpc-pegnet
-version: '0.1.1.2'
+version: '0.1.1.4'
 category: Web
 author: Sergey Bushnyak
 maintainer: sergey.bushnyak@sigrlami.eu
 synopsis: simple json-rpc client for PegNet
 description: simple json-rpc client for PegNet integration
-copyright: ! 'Copyright: (c) 2019 Sergey Bushnyak'
+copyright: ! 'Copyright: (c) 2019-2021 Sergey Bushnyak'
 license: MIT
-github: sigrlami/api-rpc-pegnet
+github: kompendium-ano/pegnetd-haskell-client
 extra-source-files:
 - README.md
 dependencies:
@@ -24,7 +24,6 @@ dependencies:
   - remote-monad
   - remote-json
   - remote-json-client
-  # - json-autotype
   - json-alt
   - bytestring
 library:
