@@ -1,5 +1,5 @@
 # Haskell JSON-RPC client for PegNet daemon
-
+![build](https://github.com/kompendium-ano/pegnetd-haskell-client/workflows/build/badge.svg)
 ![Hackage](https://img.shields.io/hackage/v/api-rpc-pegnet)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/kompendium-llc/api-rpc-factom/blob/master/LICENSE)
 
