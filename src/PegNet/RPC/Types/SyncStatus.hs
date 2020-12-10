@@ -28,8 +28,8 @@ o .:?? val = fmap join (o .:? val)
 
 data SyncStatus =
   SyncStatus
-    { ssFactomHeight  :: Double
-    , ssPegSyncHeight :: Double
+    { ssFactomHeight  :: Int
+    , ssPegSyncHeight :: Int
     } deriving (Show,Eq,GHC.Generics.Generic)
 
 instance FromJSON SyncStatus where

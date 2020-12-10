@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveFunctor       #-}
 {-# LANGUAGE DeriveGeneric       #-}
 {-# LANGUAGE OverloadedStrings   #-}
 {-# LANGUAGE RecordWildCards     #-}
@@ -32,8 +33,9 @@ o .:?? val = fmap join (o .:? val)
       -- <*> v
       -- .:  "pAED"
 
-data NetBalances = NetBalances {
-    pBRL  :: Int64,
+data NetBalances =
+  NetBalances
+  { pBRL  :: Int64,
     pRVN  :: Int64,
     pEUR  :: Int64,
     pUSD  :: Int64,
@@ -407,3 +409,70 @@ instance ToJSON NetBalances where
     <> "pGDB"
     .= pGDB
     )
+
+-- mkAssetsList :: NetBalances -> [(String, Int64)]
+-- mkAssetsList NetBalances {..} =
+
+toAssetsList :: NetBalances -> [(String, Int64)]
+toAssetsList nb =
+    [ ("pBRL", pBRL nb)
+    , ("pRVN", pRVN nb)
+    , ("pEUR", pEUR nb)
+    , ("pUSD", pUSD nb)
+    , ("PEG" , pPEG nb)
+    , ("pCHF", pCHF nb)
+    , ("pDCR", pDCR nb)
+    , ("pLTC", pLTC nb)
+    , ("pMXN", pMXN nb)
+    , ("pKRW", pKRW nb)
+    , ("pXBT", pXBT nb)
+    , ("pBNB", pBNB nb)
+    , ("pCAD", pCAD nb)
+    , ("pZEC", pZEC nb)
+    , ("pXAU", pXAU nb)
+    , ("pADA", pADA nb)
+    , ("pCNY", pCNY nb)
+    , ("pXMR", pXMR nb)
+    , ("pHKD", pHKD nb)
+    , ("pINR", pINR nb)
+    , ("pGBP", pGBP nb)
+    , ("pSGD", pSGD nb)
+    , ("pPHP", pPHP nb)
+    , ("pJPY", pJPY nb)
+    , ("pDASH",  pDASH nb)
+    , ("pXAG", pXAG nb)
+    , ("pXBC", pXBC nb)
+    , ("pFCT", pFCT nb)
+    , ("pXLM", pXLM nb)
+    , ("pETH", pETH nb)
+    , ("pNEO", pNEO nb)
+    , ("pHT" , pHT nb)
+    , ("pATOM",  pATOM nb)
+    , ("pTZS", pTZS nb)
+    , ("pRUB", pRUB nb)
+    , ("pNZD", pNZD nb)
+    , ("pLINK",  pLINK nb)
+    , ("pARS", pARS nb)
+    , ("pRWF", pRWF nb)
+    , ("pCRO", pCRO nb)
+    , ("pZAR", pZAR nb)
+    , ("pEOS", pEOS nb)
+    , ("pDOGE",  pDOGE nb)
+    , ("pHBAR",  pHBAR nb)
+    , ("pBAT", pBAT nb)
+    , ("pNGN", pNGN nb)
+    , ("pTWD", pTWD nb)
+    , ("pTRY", pTRY nb)
+    , ("pVET", pVET nb)
+    , ("pETC", pETC nb)
+    , ("pNOK", pNOK nb)
+    , ("pUGX", pUGX nb)
+    , ("pSEK", pSEK nb)
+    , ("pONT", pONT nb)
+    , ("pBIF", pBIF nb)
+    , ("pALGO",  pALGO nb)
+    , ("pKES", pKES nb)
+    , ("pETB", pETB nb)
+    , ("pXTZ", pXTZ nb)
+    , ("pGDB", pGDB nb)
+    ]

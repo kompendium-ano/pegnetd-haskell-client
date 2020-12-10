@@ -20,6 +20,9 @@ import           Control.Remote.Monad.JSON.Router
 import           Control.Remote.Monad.JSON.Trace
 import           Data.Aeson
 import           Data.Aeson.Types
+import           Data.Function                      (on)
+import           Data.List                          (sort, sortBy)
+import           Data.Ord                           (comparing)
 import           Data.Text
 import           Network.Socket                     (HostName, ServiceName,
                                                      SocketType (Stream),
@@ -75,8 +78,8 @@ reqPegNetBalances address =
 
 -- | "get-pegnet-rates"
 --   Returns the pegnet conversion rates for a given block height.
-reqPegNetRates :: Int           -- ^ Specified height to get rates at
-               -> RPC Rates     -- ^ Resulted Rates
+reqPegNetRates :: Int              -- ^ Specified height to get rates at
+               -> RPC NetBalances  -- ^ Resulted Rates
 reqPegNetRates height =
   method "get-pegnet-rates"
     $ Named [("height", toJSON height)]
@@ -131,30 +134,3 @@ reqGetRichList mbAsset limit =
              ++ (case mbAsset of
                    Nothing    -> []
                    Just asset -> [("asset", String asset)]))
-
-
---------------------------------------------------------------------------------
-
--- Testing access functionality
--- NB: Factom and PegNet API return results with `plain\text` headers, we
---     need to use alternative client to handle conversion issues, since Wreq
---     library automatically throws and error for responses that are not `application\json`
-main = do
-  let s = weakSession $ traceSendAPI "" $ clientSendAPIWithAlt endpointRemote
-  (h, i, b) <- send s $ do
-         h <- reqGetSyncStatus
-         i <- reqPegNetIssuance
-         b <- reqPegNetBalances "FA27NTqgJ6zQ4cqZsWeK9SwKAqfxpn3zCj3p5QHHuZXrDNugugUA"
-         --t <- reqGetTransaction "0-e4380e6334b0c42d4d6155fbd1378050b91c02a0df93d7fdfe6656f94c61e7eb"
-         --r <- reqPegNetRates 213000
-         -- s <- reqGetTransactionStatus "a33d4f334a2658c17d3f44158af75f1c32cc6b2f3de9ddc337064c93043d8db0"
-         -- rich <- reqGetRichList (Just "PEG") 5
-         return (h, i, b)
-  -- process resulted values
-  --print h
-  --print i
-  putStrLn "Node State:"
-  print h
-  putStrLn "\nPegNet balances for address: "
-  print b
-  return ()
