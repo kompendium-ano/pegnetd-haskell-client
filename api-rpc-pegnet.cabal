@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4fe84ebad139539893b2a5c255710a6f8452cf69a8e3c184063467bf12968e7d
+-- hash: 81b70a1edcf9ea99a8cefb6dc87c3b686207181426f8b1418e77b2a4822e4e80
 
 name:           api-rpc-pegnet
-version:        0.1.1.4
+version:        0.1.1.5
 synopsis:       simple json-rpc client for PegNet
 description:    simple json-rpc client for PegNet integration
 category:       Web
